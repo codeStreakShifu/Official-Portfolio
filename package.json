@@ -2,7 +2,7 @@
   "name": "official-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://codestreakshifu.github.io/official-portfolio",
+  "homepage": "https://codestreakShifu.github.io/Official-Portfolio",
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@testing-library/dom": "^10.4.0",
