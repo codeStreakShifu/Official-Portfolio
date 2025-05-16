@@ -1,5 +1,5 @@
 // 1. HERO SECTION - src/sections/Hero.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
 
@@ -11,6 +11,48 @@ const Hero = () => {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
   };
+
+  const roles = [
+    "Website Developer",
+    "Graphic Designer",
+    "Social Media Manager"
+  ];
+  const [currentRole, setCurrentRole] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const typeSpeed = 100;
+    const deleteSpeed = 50;
+    const pauseDuration = 2000;
+
+    const handleTyping = () => {
+      const currentText = roles[currentRole];
+      
+      if (!isDeleting) {
+        setText(currentText.substring(0, text.length + 1));
+        
+        if (text === currentText) {
+          setIsDeleting(true);
+          setTimeout(() => {}, pauseDuration);
+        }
+      } else {
+        setText(currentText.substring(0, text.length - 1));
+        
+        if (text === '') {
+          setIsDeleting(false);
+          setCurrentRole((prev) => (prev + 1) % roles.length);
+        }
+      }
+    };
+
+    const timer = setTimeout(
+      handleTyping,
+      isDeleting ? deleteSpeed : typeSpeed
+    );
+
+    return () => clearTimeout(timer);
+  }, [text, currentRole, isDeleting]);
 
   return (
     <Parallax
@@ -73,10 +115,11 @@ const Hero = () => {
             <motion.p
               {...fadeIn}
               transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-300 font-light"
+              className="text-xl md:text-2xl text-gray-300 font-light min-h-[2em] flex items-center justify-center"
             >
               <span className="typing-text">
-                Website Developer • Graphic Designer • Social Media Manager
+                {text}
+                <span className="animate-pulse">|</span>
               </span>
             </motion.p>
 

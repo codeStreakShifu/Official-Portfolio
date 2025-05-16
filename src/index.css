@@ -19,11 +19,21 @@ code {
 
 .typing-text {
   display: inline-block;
-  overflow: hidden;
-  border-right: .15em solid transparent;
   white-space: nowrap;
-  animation: typing 3.5s steps(40, end),
-             blink-caret .75s step-end infinite;
+  overflow: hidden;
+  border-right: 2px solid transparent;
+}
+
+@media (max-width: 768px) {
+  .typing-text {
+    font-size: 1.25rem; /* 20px */
+  }
+}
+
+@media (max-width: 480px) {
+  .typing-text {
+    font-size: 1rem; /* 16px */
+  }
 }
 
 @keyframes blink-caret {
